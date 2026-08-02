@@ -9,7 +9,7 @@ $.fn.generateConfetti = function (options) {
                             and now supports initial random rotation angle.
 
             Examples:
-                    
+
                             $('body').generateConfetti({
                                 confettiCount: 70,
                                 colors: ['#FFC300', '#FF5733', '#C70039', '#900C3F', '#581845'],
@@ -17,7 +17,7 @@ $.fn.generateConfetti = function (options) {
                                 icon: "fa-star"
                             });
 
-                            
+
                             $('body').generateConfetti({
                                 confettiCount: 70,
                                 colors: ['#FFC300', '#FF5733', '#C70039', '#900C3F', '#581845'],
@@ -67,7 +67,6 @@ $.fn.generateConfetti = function (options) {
                                 maxRotation: 10
                             });
 
-                            
 
         */
 
