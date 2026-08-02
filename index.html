@@ -1,0 +1,153 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>confettiFX Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        :root {
+            --bg1: #0f172a;
+            --bg2: #1d4ed8;
+            --card: rgba(255,255,255,0.12);
+            --text: #f8fafc;
+            --muted: #cbd5e1;
+            --btn: #f59e0b;
+            --btn2: #22c55e;
+            --btn3: #ef4444;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text);
+            background: radial-gradient(circle at 20% 20%, #1e293b, transparent 40%),
+                        radial-gradient(circle at 80% 0%, #2563eb, transparent 35%),
+                        linear-gradient(140deg, var(--bg1), var(--bg2));
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .card {
+            width: min(94vw, 760px);
+            padding: 28px;
+            border-radius: 18px;
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.22);
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: clamp(1.5rem, 2vw + 1rem, 2.3rem);
+            font-weight: 800;
+            letter-spacing: .3px;
+        }
+
+        p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .buttons {
+            margin-top: 22px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: 0;
+            color: #111827;
+            padding: 10px 16px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-icon { background: var(--btn); }
+        .btn-image { background: var(--btn2); }
+        .btn-clear { background: var(--btn3); color: #fff; }
+
+        code {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 5px 8px;
+            border-radius: 7px;
+            background: rgba(15, 23, 42, 0.6);
+            color: #e2e8f0;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>confettiFX jQuery Plugin</h1>
+        <p>Demo de <code>generateConfetti()</code> y <code>clearConfetti()</code></p>
+
+        <div class="buttons">
+            <button class="btn-icon" id="btnIcon"><i class="fa-solid fa-star"></i> Icon Confetti</button>
+            <button class="btn-image" id="btnImage"><i class="fa-solid fa-image"></i> Image Confetti</button>
+            <button class="btn-clear" id="btnClear"><i class="fa-solid fa-trash"></i> Clear</button>
+        </div>
+
+        <code>Load order: jQuery -> jquery.confettiFX.js</code>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/jquery.confettiFX.js"></script>
+    <script>
+        (function () {
+            var imgSet = [
+                'https://dummyimage.com/80x80/f59e0b/111827.png&text=A',
+                'https://dummyimage.com/80x80/22c55e/111827.png&text=B',
+                'https://dummyimage.com/80x80/38bdf8/111827.png&text=C'
+            ];
+
+            $('#btnIcon').on('click', function () {
+                $('body').confettiFX('start', {
+                    confettiCount: 45,
+                    icon: 'fa-star',
+                    colors: ['#FFC300', '#FF5733', '#C70039', '#22c55e', '#38bdf8'],
+                    fixedSize: 18,
+                    movement: 'random',
+                    spin: true,
+                    spinSpeed: 'medium',
+                    fadeStart: 0.65,
+                    fadeDuration: 0.35
+                });
+            });
+
+            $('#btnImage').on('click', function () {
+                $('body').confettiFX('start', {
+                    confettiCount: 12,
+                    imageUrls: imgSet,
+                    movement: 'direction-only',
+                    direction: 'bottom-to-top',
+                    minimumSize: 48,
+                    minRotation: -8,
+                    maxRotation: 8,
+                    spin: false,
+                    fadeStart: 0.85,
+                    fadeDuration: 0.15
+                });
+            });
+
+            $('#btnClear').on('click', function () {
+                $('body').confettiFX('stop');
+            });
+        })();
+    </script>
+</body>
+</html>

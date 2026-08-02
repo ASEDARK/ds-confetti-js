@@ -1,0 +1,30 @@
+{
+  "name": "ds-confetti-js",
+  "version": "1.3.0",
+  "description": "Plugin jQuery de Digitaly Studio para crear efectos de confeti configurables.",
+  "main": "js/jquery.confettiFX.js",
+  "files": [
+    "js/jquery.confettiFX.js",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "jquery",
+    "confetti",
+    "animation",
+    "digitaly-studio"
+  ],
+  "author": "Digitaly Studio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ASEDARK/ds-confetti-js.git"
+  },
+  "homepage": "https://github.com/ASEDARK/ds-confetti-js#readme",
+  "bugs": {
+    "url": "https://github.com/ASEDARK/ds-confetti-js/issues"
+  },
+  "peerDependencies": {
+    "jquery": ">=3.0.0"
+  }
+}
