@@ -1,6 +1,6 @@
 {
   "name": "ds-confetti-js",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Plugin jQuery de Digitaly Studio para crear efectos de confeti configurables.",
   "main": "js/jquery.ds-confetti.js",
   "files": [

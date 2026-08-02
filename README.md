@@ -110,19 +110,6 @@ $('body').dsConfetti('start', {
 - `preset`: configuración `party`, `snow` o `fireworks`.
 - `duration`: limpieza automática en milisegundos.
 
-## Compatibilidad con confettiFX
-
-Los nombres anteriores continúan disponibles para no romper implementaciones existentes:
-
-```js
-$('body').confettiFX('start', options);
-$('body').generateConfetti(options);
-$('body').clearConfettiFX();
-$('body').clearConfetti();
-```
-
-Se recomienda utilizar `dsConfetti()` en desarrollos nuevos.
-
 ## Demo
 
 Abre `index.html` desde un servidor web para ejecutar la demostración incluida.

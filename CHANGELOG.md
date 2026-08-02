@@ -2,6 +2,16 @@
 
 Todos los cambios importantes de `DS Confetti JS` se documentarán en este archivo.
 
+## [2.0.0] - 2026-08-02
+
+### Removed
+- Eliminados los aliases heredados `$.fn.confettiFX()`, `$.fn.generateConfetti()`, `$.fn.clearConfettiFX()` y `$.fn.clearConfetti()`.
+
+### Migration
+- Sustituye `confettiFX()` por `dsConfetti()`.
+- Sustituye `generateConfetti()` por `dsGenerateConfetti()`.
+- Sustituye `clearConfettiFX()` o `clearConfetti()` por `clearDSConfetti()`.
+
 ## [1.4.0] - 2026-08-02
 
 ### Added

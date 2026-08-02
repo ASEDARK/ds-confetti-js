@@ -793,10 +793,4 @@ $.fn.dsGenerateConfetti = function (options) {
 
     $.fn.dsConfetti = dsConfettiCommand;
 
-    // Backward-compatible aliases for projects using the original API.
-    $.fn.generateConfetti = $.fn.dsGenerateConfetti;
-    $.fn.clearConfetti = $.fn.clearDSConfetti;
-    $.fn.clearConfettiFX = $.fn.clearDSConfetti;
-    $.fn.confettiFX = dsConfettiCommand;
-
 })(jQuery);
