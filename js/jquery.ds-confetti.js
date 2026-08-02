@@ -1,16 +1,17 @@
 ﻿(function($) {
 
-$.fn.generateConfetti = function (options) {
+$.fn.dsGenerateConfetti = function (options) {
     /*
-            Author:         Abelardo SÃ¡nchez EspaÃ±a
-            Date:           2024/11/17
-            Modification:   2025/11/08
-            Description:    Generate Custom Confetti with optional spin animation, diagonal and vertical movement,
-                            and now supports initial random rotation angle.
+            Project:        DS Confetti JS
+            Author:         Digitaly Studio
+            Created:        2024/11/17
+            Updated:        2026/08/02
+            Description:    Configurable jQuery confetti effects with icons, images,
+                            trajectories, rotation, frame animation and cleanup.
 
             Examples:
 
-                            $('body').generateConfetti({
+                            $('body').dsGenerateConfetti({
                                 confettiCount: 70,
                                 colors: ['#FFC300', '#FF5733', '#C70039', '#900C3F', '#581845'],
                                 circles: false,
@@ -18,7 +19,7 @@ $.fn.generateConfetti = function (options) {
                             });
 
 
-                            $('body').generateConfetti({
+                            $('body').dsGenerateConfetti({
                                 confettiCount: 70,
                                 colors: ['#FFC300', '#FF5733', '#C70039', '#900C3F', '#581845'],
                                 icon: "fa-star",
@@ -33,7 +34,7 @@ $.fn.generateConfetti = function (options) {
                                 blinkCooldownTicks: 2
                             });
 
-                            $('body').generateConfetti({
+                            $('body').dsGenerateConfetti({
                                 confettiCount: 50,
                                 imageUrls: [
                                     'https://example.com/image1.png',
@@ -49,7 +50,7 @@ $.fn.generateConfetti = function (options) {
                                 maxRotation: 360
                             });
 
-                            $('body').generateConfetti({
+                            $('body').dsGenerateConfetti({
                                 confettiCount: 10,
                                 imageUrls: [
                                     './assets/img/Abeja-01.png'
@@ -744,7 +745,7 @@ $.fn.generateConfetti = function (options) {
     };
 
 
-    $.fn.clearConfettiFX = function () {
+    $.fn.clearDSConfetti = function () {
         return this.each(function () {
             var $el = $(this);
             var fn = $el.data('confettiCleanup');
@@ -753,11 +754,7 @@ $.fn.generateConfetti = function (options) {
         });
     };
 
-    $.fn.clearConfetti = function () {
-        return this.clearConfettiFX();
-    };
-
-    $.fn.confettiFX = function (command, options) {
+    function dsConfettiCommand(command, options) {
         var cmd = command;
         var opts = options;
 
@@ -778,20 +775,28 @@ $.fn.generateConfetti = function (options) {
         if (cmd === 'start') {
             return this.each(function () {
                 var $el = $(this);
-                $el.clearConfettiFX();
-                $el.generateConfetti(opts || {});
+                $el.clearDSConfetti();
+                $el.dsGenerateConfetti(opts || {});
             });
         }
 
         if (cmd === 'stop' || cmd === 'destroy') {
-            return this.clearConfettiFX();
+            return this.clearDSConfetti();
         }
 
         return this.each(function () {
             var $el = $(this);
-            $el.clearConfettiFX();
-            $el.generateConfetti(opts || {});
+            $el.clearDSConfetti();
+            $el.dsGenerateConfetti(opts || {});
         });
-    };
+    }
+
+    $.fn.dsConfetti = dsConfettiCommand;
+
+    // Backward-compatible aliases for projects using the original API.
+    $.fn.generateConfetti = $.fn.dsGenerateConfetti;
+    $.fn.clearConfetti = $.fn.clearDSConfetti;
+    $.fn.clearConfettiFX = $.fn.clearDSConfetti;
+    $.fn.confettiFX = dsConfettiCommand;
 
 })(jQuery);

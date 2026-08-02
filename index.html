@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>confettiFX Demo</title>
+    <title>DS Confetti JS Demo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
@@ -93,8 +93,8 @@
 </head>
 <body>
     <div class="card">
-        <h1>confettiFX jQuery Plugin</h1>
-        <p>Demo de <code>generateConfetti()</code> y <code>clearConfetti()</code></p>
+        <h1>DS Confetti JS</h1>
+        <p>Plugin jQuery de Digitaly Studio</p>
 
         <div class="buttons">
             <button class="btn-icon" id="btnIcon"><i class="fa-solid fa-star"></i> Icon Confetti</button>
@@ -102,11 +102,11 @@
             <button class="btn-clear" id="btnClear"><i class="fa-solid fa-trash"></i> Clear</button>
         </div>
 
-        <code>Load order: jQuery -> jquery.confettiFX.js</code>
+        <code>Orden de carga: jQuery -&gt; jquery.ds-confetti.js</code>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./js/jquery.confettiFX.js"></script>
+    <script src="./js/jquery.ds-confetti.js"></script>
     <script>
         (function () {
             var imgSet = [
@@ -116,7 +116,7 @@
             ];
 
             $('#btnIcon').on('click', function () {
-                $('body').confettiFX('start', {
+                $('body').dsConfetti('start', {
                     confettiCount: 45,
                     icon: 'fa-star',
                     colors: ['#FFC300', '#FF5733', '#C70039', '#22c55e', '#38bdf8'],
@@ -130,7 +130,7 @@
             });
 
             $('#btnImage').on('click', function () {
-                $('body').confettiFX('start', {
+                $('body').dsConfetti('start', {
                     confettiCount: 12,
                     imageUrls: imgSet,
                     movement: 'direction-only',
@@ -145,7 +145,7 @@
             });
 
             $('#btnClear').on('click', function () {
-                $('body').confettiFX('stop');
+                $('body').dsConfetti('stop');
             });
         })();
     </script>

@@ -1,59 +1,74 @@
-﻿# confettiFX
+# DS Confetti JS
 
-Plugin jQuery para generar confetti con iconos o imagenes, soporte de trayectoria configurable, giro, animacion por frames y limpieza del efecto.
+Plugin jQuery de **Digitaly Studio** para crear efectos de confeti configurables con iconos o imágenes. Incluye trayectorias, giros, animación por fotogramas, explosiones, presets y limpieza automática.
 
-## Archivos
+## Instalación
 
-- `js/jquery.confettiFX.js`
-- `index.html` (demo rapida)
+Desde GitHub:
+
+```bash
+npm install github:ASEDARK/ds-confetti-js
+```
+
+También puedes clonar el repositorio:
+
+```bash
+git clone https://github.com/ASEDARK/ds-confetti-js.git
+```
 
 ## Requisitos
 
-- jQuery (probado con 3.6.0)
-- Font Awesome si usas modo icono (`icon: "fa-*"`)
+- jQuery 3.0.0 o superior.
+- Font Awesome únicamente si utilizas iconos como `fa-star`.
 
-## Carga
+## Carga en el navegador
+
+Carga jQuery antes del plugin:
 
 ```html
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/js/plugins/confettiFX/js/jquery.confettiFX.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="node_modules/ds-confetti-js/js/jquery.ds-confetti.js"></script>
 ```
 
-## API De Comandos
+Si copias el archivo distribuido a tus recursos públicos, ajusta la segunda ruta según tu proyecto.
+
+## API principal
 
 ```js
-$('body').confettiFX();                    // start con defaults
-$('body').confettiFX('start', { confettiCount: 60 });
-$('body').confettiFX('stop');
-$('body').confettiFX('destroy');
+$('body').dsConfetti();
+$('body').dsConfetti('start', { confettiCount: 60 });
+$('body').dsConfetti('stop');
+$('body').dsConfetti('destroy');
 ```
 
-## Uso Basico
+También puedes pasar las opciones directamente:
 
 ```js
-$('body').confettiFX('start', {
+$('body').dsConfetti({
   confettiCount: 50,
   icon: 'fa-star',
   movement: 'random',
   spin: true
-})
+});
 ```
 
-## Modo Burst / Explosion
+## Explosión
 
 ```js
-$('body').confettiFX('start', {
+$('body').dsConfetti('start', {
   mode: 'burst',
-  originX: 50, // %
-  originY: 50, // %
+  originX: 50,
+  originY: 50,
   confettiCount: 80
-})
+});
 ```
 
-## Uso Con Imagenes
+## Uso con imágenes
+
+Las imágenes pertenecen al proyecto consumidor; DS Confetti JS solamente recibe sus rutas.
 
 ```js
-$('body').confettiFX('start', {
+$('body').dsConfetti('start', {
   confettiCount: 12,
   imageUrls: [
     './assets/img/Ada-01.png',
@@ -67,41 +82,53 @@ $('body').confettiFX('start', {
 });
 ```
 
-## Presets Y Duracion
+## Presets y duración
 
 ```js
-$('body').confettiFX('start', {
+$('body').dsConfetti('start', {
   preset: 'party', // party | snow | fireworks
-  duration: 5000   // auto-stop en ms
-})
+  duration: 5000
+});
 ```
 
-## Opciones Principales
+## Opciones principales
 
-- `confettiCount` numero de piezas.
-- `colors` colores para modo icono.
-- `icon` icono Font Awesome en modo icono.
-- `imageUrls` array de imagenes para modo imagen.
-- `minimumSize` y `maximumSize` rango de tamano.
-- `fixedSize` tamano fijo.
-- `movement` `random`, `vertical`, `horizontal`, `direction-only`.
-- `direction` `top-to-bottom`, `bottom-to-top`, `left-to-right`, `right-to-left`, y diagonales.
-- `mode` `stream` o `burst`.
-- `originX` y `originY` origen en porcentaje para `burst`.
-- `spin` y `spinSpeed` giro interno de la pieza.
-- `minRotation`, `maxRotation`, `startRotation`, `endRotation` control de rotacion de trayectoria.
-- `fadeStart` y `fadeDuration` control de desvanecido.
-- `animateFrames`, `frameInterval`, `randomFrameStart` animacion por frames de imagen.
-- `blink`, `blinkInterval`, `blinkProbability`, `blinkCooldownTicks` efecto twinkle.
-- `preset` configuraciones listas: `party`, `snow`, `fireworks`.
-- `duration` auto-limpieza en milisegundos.
+- `confettiCount`: número de piezas.
+- `colors`: colores utilizados en el modo icono.
+- `icon`: clase de Font Awesome.
+- `imageUrls`: arreglo de imágenes para el modo imagen.
+- `minimumSize`, `maximumSize` y `fixedSize`: control del tamaño.
+- `movement`: `random`, `vertical`, `horizontal` o `direction-only`.
+- `direction`: dirección vertical, horizontal o diagonal.
+- `mode`: `stream` o `burst`.
+- `originX` y `originY`: origen porcentual de una explosión.
+- `spin` y `spinSpeed`: giro de cada pieza.
+- `minRotation`, `maxRotation`, `startRotation` y `endRotation`: rotación de la trayectoria.
+- `fadeStart` y `fadeDuration`: desvanecimiento.
+- `animateFrames`, `frameInterval` y `randomFrameStart`: animación por fotogramas.
+- `blink`, `blinkInterval`, `blinkProbability` y `blinkCooldownTicks`: efecto de destello.
+- `preset`: configuración `party`, `snow` o `fireworks`.
+- `duration`: limpieza automática en milisegundos.
 
-## Notas
+## Compatibilidad con confettiFX
 
-- En imagenes estaticas, el plugin ya evita repetir inmediatamente la imagen previa por pieza cuando hay alternativas.
-- En cada iteracion se recalcula trayectoria para evitar que todas las vueltas salgan exactamente del mismo punto.
-- La animacion principal usa `transform: translate3d(...)` para mejor rendimiento.
+Los nombres anteriores continúan disponibles para no romper implementaciones existentes:
 
-## Changelog
+```js
+$('body').confettiFX('start', options);
+$('body').generateConfetti(options);
+$('body').clearConfettiFX();
+$('body').clearConfetti();
+```
 
-- See [CHANGELOG.md](./CHANGELOG.md) for version history.
+Se recomienda utilizar `dsConfetti()` en desarrollos nuevos.
+
+## Demo
+
+Abre `index.html` desde un servidor web para ejecutar la demostración incluida.
+
+## Licencia
+
+[MIT](./LICENSE) © Digitaly Studio.
+
+Consulta [CHANGELOG.md](./CHANGELOG.md) para conocer el historial de versiones.

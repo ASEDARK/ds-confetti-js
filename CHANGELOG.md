@@ -1,6 +1,20 @@
 ﻿# Changelog
 
-All notable changes to `confettiFX` will be documented in this file.
+Todos los cambios importantes de `DS Confetti JS` se documentarán en este archivo.
+
+## [1.4.0] - 2026-08-02
+
+### Added
+- Nueva API principal `$.fn.dsConfetti()` con los comandos `start`, `stop` y `destroy`.
+- Nuevos métodos `$.fn.dsGenerateConfetti()` y `$.fn.clearDSConfetti()`.
+
+### Changed
+- Identidad del proyecto actualizada a DS Confetti JS de Digitaly Studio.
+- Archivo distribuido renombrado a `js/jquery.ds-confetti.js`.
+- Documentación y demo actualizadas con la API oficial.
+
+### Compatibility
+- `$.fn.confettiFX()`, `$.fn.generateConfetti()`, `$.fn.clearConfettiFX()` y `$.fn.clearConfetti()` continúan disponibles como alias heredados.
 
 ## [1.3.0] - 2026-03-06
 
