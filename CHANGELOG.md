@@ -2,6 +2,13 @@
 
 Todos los cambios importantes de `DS Confetti JS` se documentarán en este archivo.
 
+## [Unreleased]
+
+### Documentation
+- Documentada la carga mediante jsDelivr con una revisión fija.
+- Aclaradas las diferencias entre `dsConfetti()`, `dsGenerateConfetti()` y `clearDSConfetti()`.
+- Agregada la tabla de migración desde las APIs heredadas.
+
 ## [2.0.0] - 2026-08-02
 
 ### Removed
