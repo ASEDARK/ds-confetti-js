@@ -9,6 +9,9 @@ Todos los cambios importantes de `DS Confetti JS` se documentarán en este archi
 - Aclaradas las diferencias entre `dsConfetti()`, `dsGenerateConfetti()` y `clearDSConfetti()`.
 - Agregada la tabla de migración desde las APIs heredadas.
 
+### Delivery
+- Agregado un workflow manual para publicar y verificar el archivo estable utilizado por Play.AsemediaDS.
+
 ## [2.0.0] - 2026-08-02
 
 ### Removed

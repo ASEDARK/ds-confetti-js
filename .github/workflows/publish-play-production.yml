@@ -1,0 +1,78 @@
+name: Publish to Play production
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ds-confetti-play-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Upload stable plugin file
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://play.asemediads.com/
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Validate distributed file
+        run: node --check js/jquery.ds-confetti.js
+
+      - name: Upload and verify stable file
+        shell: bash
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTE_PATH: ${{ secrets.FTP_REMOTE_PATH }}
+        run: |
+          set -euo pipefail
+
+          for secret_name in FTP_HOST FTP_PORT FTP_USERNAME FTP_PASSWORD FTP_REMOTE_PATH; do
+            if [[ -z "${!secret_name:-}" ]]; then
+              echo "Missing required secret: $secret_name" >&2
+              exit 1
+            fi
+          done
+
+          local_file="js/jquery.ds-confetti.js"
+          remote_file="assets/js/plugins/ds-confetti/jquery.ds-confetti.js"
+          remote_root="${FTP_REMOTE_PATH%/}"
+          encoded_file="$(python3 -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe="/"))' "$remote_file")"
+          remote_url="ftp://${FTP_HOST}:${FTP_PORT}${remote_root}/${encoded_file}"
+
+          curl --fail --silent --show-error \
+            --retry 3 --retry-all-errors --connect-timeout 20 \
+            --ssl-reqd --ftp-create-dirs \
+            --user "${FTP_USERNAME}:${FTP_PASSWORD}" \
+            --upload-file "$local_file" "$remote_url"
+
+          remote_copy="$(mktemp)"
+          trap 'rm -f "$remote_copy"' EXIT
+
+          curl --fail --silent --show-error \
+            --retry 3 --retry-all-errors --connect-timeout 20 \
+            --ssl-reqd \
+            --user "${FTP_USERNAME}:${FTP_PASSWORD}" \
+            --output "$remote_copy" "$remote_url"
+
+          local_hash="$(sha256sum "$local_file" | cut -d ' ' -f 1)"
+          remote_hash="$(sha256sum "$remote_copy" | cut -d ' ' -f 1)"
+
+          if [[ "$local_hash" != "$remote_hash" ]]; then
+            echo "Hash verification failed: $remote_file" >&2
+            exit 1
+          fi
+
+          echo "### DS Confetti JS production" >> "$GITHUB_STEP_SUMMARY"
+          echo "Source commit: \`${GITHUB_SHA}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Published file: \`/${remote_file}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "SHA-256: \`${local_hash}\`" >> "$GITHUB_STEP_SUMMARY"

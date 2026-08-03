@@ -9,7 +9,19 @@ La versión actual es `2.0.0`. Desde esta versión solamente se mantienen las AP
 - jQuery 3.0.0 o superior.
 - Font Awesome únicamente cuando se utilizan iconos, por ejemplo `icon: 'fa-star'`.
 
-## Carga desde CDN
+## Uso en Play.AsemediaDS
+
+Las invitaciones de Play cargan siempre una ruta estable, sin versión ni hash:
+
+```html
+<script src="/assets/js/plugins/ds-confetti/jquery.ds-confetti.js"></script>
+```
+
+El archivo se publica directamente desde este repositorio mediante el workflow **Publish to Play production**. Una mejora no llega a producción con solo hacer `push`: primero se prueba y después se ejecuta manualmente ese workflow desde la pestaña **Actions**.
+
+El proceso valida la sintaxis, sube el archivo mediante FTPS y compara su hash SHA-256 con la copia remota. Play no guarda otra copia del código fuente del plugin en Git.
+
+## Carga desde CDN en otros proyectos
 
 Carga jQuery antes del plugin. Para producción se recomienda fijar una revisión concreta, de modo que una actualización futura del repositorio no cambie un sitio existente sin control:
 
